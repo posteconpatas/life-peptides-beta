@@ -111,7 +111,7 @@ const legalDict = {
         title: "8. Cambios en los Términos y Política de Privacidad",
         paragraphs: [
           "Nos reservamos el derecho de actualizar o modificar estos Términos y Condiciones y nuestra Política de Privacidad en cualquier momento. Cualquier cambio se publicará directamente en esta página, y el uso continuado de nuestros servicios implica la aceptación de dichas modificaciones.",
-          "Para cualquier consulta relacionada con estos términos, soporte de pedidos o privacidad, puede comunicarse directamente a través de nuestro canal oficial de WhatsApp (+591 76309344)."
+          "Para cualquier consulta relacionada con estos términos, soporte de pedidos o privacidad, puede comunicarse directamente a través de nuestro canal oficial de WhatsApp (+591 78272722)."
         ]
       }
     ],
@@ -192,7 +192,7 @@ const legalDict = {
       {
         title: "8. Alterações e Contato",
         paragraphs: [
-          "Reservamo-nos o direito de atualizar estes Termos e Condições a qualquer momento. Para qualquer dúvida, entre em contato pelo nosso WhatsApp oficial (+591 76309344)."
+          "Reservamo-nos o direito de atualizar estes Termos e Condições a qualquer momento. Para qualquer dúvida, entre em contato pelo nosso WhatsApp oficial (+591 78272722)."
         ]
       }
     ],
@@ -273,7 +273,7 @@ const legalDict = {
       {
         title: "8. Changes to Terms & Contact Information",
         paragraphs: [
-          "We reserve the right to update or modify these Terms and Conditions at any time. For any inquiries regarding these terms or privacy, please contact us via our official WhatsApp (+591 76309344)."
+          "We reserve the right to update or modify these Terms and Conditions at any time. For any inquiries regarding these terms or privacy, please contact us via our official WhatsApp (+591 78272722)."
         ]
       }
     ],
@@ -288,7 +288,6 @@ export default function TerminosPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0f1c] text-white-lp font-sans flex flex-col justify-between">
-      {/* BARRA SUPERIOR */}
       <nav className="sticky top-0 z-40 bg-[#111a2e]/95 backdrop-blur-md border-b border-gold/20 px-4 sm:px-8 md:px-16 py-3 flex justify-between items-center shadow-lg">
         <Link href="/" className="flex items-center gap-3 group">
           <div className="w-16 sm:w-20">
@@ -312,7 +311,6 @@ export default function TerminosPage() {
         </div>
       </nav>
 
-      {/* CONTENIDO PRINCIPAL */}
       <main className="max-w-4xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
         <div className="text-center mb-10 sm:mb-14 border-b border-gold/20 pb-8">
           <span className="inline-block bg-gold/10 border border-gold/30 text-gold text-[10px] sm:text-xs uppercase tracking-[3px] px-3.5 py-1 rounded-full mb-4">
@@ -326,14 +324,12 @@ export default function TerminosPage() {
           </p>
         </div>
 
-        {/* CAJA DE INTRODUCCIÓN DESTACADA */}
         <div className="bg-[#111a2e] border-l-4 border-gold p-5 sm:p-6 rounded-r-xl mb-10 text-xs sm:text-sm text-white-lp/85 leading-relaxed shadow-md">
           {t.intro}
         </div>
 
-        {/* SECCIONES LEGALES */}
         <div className="space-y-8">
-          {t.sections.map((sec, idx) => (
+          {t.sections.map((sec: any, idx: number) => (
             <section
               key={idx}
               className="bg-[#0f172a]/90 border border-gold/15 rounded-xl p-5 sm:p-7 space-y-4 shadow-md"
@@ -343,7 +339,7 @@ export default function TerminosPage() {
               </h2>
 
               {sec.paragraphs &&
-                sec.paragraphs.map((p, i) => (
+                sec.paragraphs.map((p: string, i: number) => (
                   <p key={i} className="text-xs sm:text-sm text-white-lp/75 leading-relaxed">
                     {p}
                   </p>
@@ -357,7 +353,7 @@ export default function TerminosPage() {
 
               {sec.list && (
                 <ul className="list-disc list-inside space-y-2 text-xs sm:text-sm text-white-lp/80 pl-2">
-                  {sec.list.map((item, i) => (
+                  {sec.list.map((item: string, i: number) => (
                     <li key={i} className="leading-relaxed">
                       {item}
                     </li>
@@ -373,7 +369,7 @@ export default function TerminosPage() {
 
               {sec.subList && (
                 <ul className="list-disc list-inside space-y-2 text-xs sm:text-sm text-white-lp/80 pl-2">
-                  {sec.subList.map((item, i) => (
+                  {sec.subList.map((item: string, i: number) => (
                     <li key={i} className="leading-relaxed">
                       {item}
                     </li>
@@ -382,7 +378,7 @@ export default function TerminosPage() {
               )}
 
               {sec.footerParagraphs &&
-                sec.footerParagraphs.map((fp, i) => (
+                sec.footerParagraphs.map((fp: string, i: number) => (
                   <p key={i} className="text-xs sm:text-sm text-white-lp/75 leading-relaxed pt-1">
                     {fp}
                   </p>
@@ -401,7 +397,6 @@ export default function TerminosPage() {
         </div>
       </main>
 
-      {/* PIE DE PÁGINA ESTILO PEPTIDES WORLD ADAPTADO A LIFE PEPTIDES BO */}
       <footer className="bg-[#111a2e] border-t border-gold/15 py-12 px-6 text-center">
         <div className="max-w-4xl mx-auto space-y-4">
           <div className="w-28 mx-auto">
