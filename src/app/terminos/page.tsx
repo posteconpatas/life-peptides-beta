@@ -5,13 +5,32 @@ import Link from "next/link";
 
 type Lang = "es" | "pt" | "en";
 
+interface LegalSection {
+  title: string;
+  paragraphs?: string[];
+  listIntro?: string;
+  list?: string[];
+  subListIntro?: string;
+  subList?: string[];
+  footerParagraphs?: string[];
+}
+
 const circularMask = {
   mixBlendMode: "screen" as const,
   WebkitMaskImage: "radial-gradient(circle at center, black 35%, transparent 70%)",
   maskImage: "radial-gradient(circle at center, black 35%, transparent 70%)"
 };
 
-const legalDict = {
+const legalDict: Record<Lang, {
+  back: string;
+  badge: string;
+  title: string;
+  subtitle: string;
+  intro: string;
+  sections: LegalSection[];
+  footerAbout: string;
+  copyright: string;
+}> = {
   es: {
     back: "← Volver a la Tienda",
     badge: "Cumplimiento Normativo y Legal",
@@ -329,7 +348,7 @@ export default function TerminosPage() {
         </div>
 
         <div className="space-y-8">
-          {t.sections.map((sec: any, idx: number) => (
+          {t.sections.map((sec, idx) => (
             <section
               key={idx}
               className="bg-[#0f172a]/90 border border-gold/15 rounded-xl p-5 sm:p-7 space-y-4 shadow-md"
@@ -339,7 +358,7 @@ export default function TerminosPage() {
               </h2>
 
               {sec.paragraphs &&
-                sec.paragraphs.map((p: string, i: number) => (
+                sec.paragraphs.map((p, i) => (
                   <p key={i} className="text-xs sm:text-sm text-white-lp/75 leading-relaxed">
                     {p}
                   </p>
@@ -353,7 +372,7 @@ export default function TerminosPage() {
 
               {sec.list && (
                 <ul className="list-disc list-inside space-y-2 text-xs sm:text-sm text-white-lp/80 pl-2">
-                  {sec.list.map((item: string, i: number) => (
+                  {sec.list.map((item, i) => (
                     <li key={i} className="leading-relaxed">
                       {item}
                     </li>
@@ -369,7 +388,7 @@ export default function TerminosPage() {
 
               {sec.subList && (
                 <ul className="list-disc list-inside space-y-2 text-xs sm:text-sm text-white-lp/80 pl-2">
-                  {sec.subList.map((item: string, i: number) => (
+                  {sec.subList.map((item, i) => (
                     <li key={i} className="leading-relaxed">
                       {item}
                     </li>
@@ -378,7 +397,7 @@ export default function TerminosPage() {
               )}
 
               {sec.footerParagraphs &&
-                sec.footerParagraphs.map((fp: string, i: number) => (
+                sec.footerParagraphs.map((fp, i) => (
                   <p key={i} className="text-xs sm:text-sm text-white-lp/75 leading-relaxed pt-1">
                     {fp}
                   </p>
