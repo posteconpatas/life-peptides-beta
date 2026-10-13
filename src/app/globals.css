@@ -1,26 +1,131 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-navy: #07101d;
+  --color-navy-2: #0b1728;
+  --color-gold: #cba15c;
+  --color-gold-light: #e8cfa0;
+  --color-white-lp: #f5f1e8;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(24px); filter: blur(6px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.35; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.15); }
+  }
+  @keyframes drift {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: .6; }
+    90% { opacity: .6; }
+    100% { transform: translateY(-120px) translateX(20px); opacity: 0; }
+  }
+  @keyframes spinDNA {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
   }
 }
 
+html { scroll-behavior: smooth; }
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-navy);
+  color: var(--color-white-lp);
+  font-family: var(--font-sans), 'Inter', sans-serif;
+  overflow-x: hidden;
 }
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-serif), 'Cormorant Garamond', serif;
+}
+
+::selection { background: var(--color-gold); color: var(--color-navy); }
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
+}
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+.animate-fade-up { animation: fadeUp 1.1s cubic-bezier(.16,1,.3,1) forwards; }
+
+/* Technical grid backdrop, very subtle */
+.tech-grid {
+  background-image:
+    linear-gradient(rgba(203,161,92,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(203,161,92,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black 20%, transparent 75%);
+}
+
+/* Ambient glow blobs (CSS only, no JS cost) */
+.glow-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  pointer-events: none;
+  animation: glowPulse 8s ease-in-out infinite;
+}
+
+/* Floating micro particles */
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--color-gold-light);
+  box-shadow: 0 0 6px var(--color-gold);
+  animation: drift 9s linear infinite;
+}
+
+/* Vial */
+.vial {
+  width: 30px;
+  height: 78px;
+  margin: 0 auto;
+  border: 1px solid rgba(203,161,92,0.6);
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, transparent, rgba(203,161,92,0.05));
+}
+.vial::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; width: 100%; height: 58%;
+  background: linear-gradient(180deg, var(--color-gold-light), var(--color-gold));
+  box-shadow: 0 0 12px rgba(203,161,92,0.5);
+}
+
+/* DNA helix */
+.dna-3d { perspective: 900px; transform-style: preserve-3d; }
+.dna-rung {
+  position: relative;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  animation: spinDNA 5s linear infinite;
+  transform-style: preserve-3d;
+}
+.dna-rung::before, .dna-rung::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--color-gold-light);
+  box-shadow: 0 0 12px var(--color-gold);
+}
+.dna-rung::before { left: -4px; }
+.dna-rung::after { right: -4px; }
+
+/* Scrollbar (subtle, premium) */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-navy); }
+::-webkit-scrollbar-thumb { background: rgba(203,161,92,0.35); border-radius: 8px; }
